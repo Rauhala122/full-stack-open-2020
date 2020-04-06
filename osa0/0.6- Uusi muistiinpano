@@ -1,0 +1,7 @@
+selain->palvelin: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+palvelin->selain: kertoo että pyyntö on täytetty ja uutta dataa on luotu
+
+note over selain:
+POST-pyyntö sisältää JSON-muodossa olevan uuden muistiinpanon. selain pysyy samalla sivulla, lähettämisen hoitaa selaimen lataamassa JavaScript-tiedostossa määritelty koodi.
+palvelin palauttaa selaimelle json-dataa, jolloin muistiinpano lisätään
+end note
