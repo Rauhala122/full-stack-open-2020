@@ -1,18 +1,46 @@
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
-
-const App = (props) => {
-  const [selected, setSelected] = useState(0)
-
+const Button = ({text, onClick}) => {
   return (
-    <div>
-      {props.anecdotes[selected]}
-    </div>
+    <button onClick={onClick}>
+      {text}
+    </button>
   )
 }
+
+
+
+const App = (props) => {
+    const [selected,setSelected] = useState(0);
+    const [votes,setVotes] = useState(new Array(props.anecdotes.length).fill(0));
+
+    const getRandomInt = (max) => {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    const vote = (i) => {
+        const copy = [...votes];
+        copy[i]++;
+        setVotes(copy);
+    };
+
+    const max = Math.max(...votes)
+    const mostVotes = votes.indexOf(max)
+
+    return (
+        <div>
+            <h1>Anecdote of the day</h1>
+            {props.anecdotes[selected]}
+            <p>has {votes[selected]} votes</p>
+            <Button text="Vote" onClick={() => vote(selected)}/>
+            <Button text="Next anecdote" onClick={() => setSelected(getRandomInt(props.anecdotes.length))}/>
+            <h2>Anecdote with the most votes</h2>
+            {props.anecdotes[mostVotes]}
+            <p>has {max} votes</p>
+        </div>
+    );
+};
 
 const anecdotes = [
   'If it hurts, do it more often',
